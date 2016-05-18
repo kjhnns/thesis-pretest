@@ -1,1 +1,1 @@
-web: findFriends
+web: thesis-pretest
