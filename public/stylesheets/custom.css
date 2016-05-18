@@ -22,3 +22,90 @@ div.imprint {
 html {
     height: 100%;
 }
+
+
+.device {
+    margin: 0 auto;
+    position: relative;
+    background: #111;
+    box-shadow: 0px 0px 0px 2px #aaa;
+    z-index: 1000;
+    padding: 100px 30px;
+    border-radius: 55px;
+}
+
+.device:after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 50%;
+    margin-left: -30px;
+    bottom: 20px;
+    border-radius: 100%;
+    box-sizing: border-box;
+    border: 5px solid #333;
+}
+
+.device:before {
+    content: '';
+    width: 60px;
+    height: 10px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+    background: #333;
+    top: 50px;
+}
+
+.device-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.device > div {
+    max-width: 100%;
+    width: 320;
+    height: 568;
+    background: #fff;
+}
+
+.device-v {
+    padding: 100px 30px;
+}
+
+.device-v+.info {
+    margin-left: 424px;
+}
+
+.device-h {
+    max-width: 1024px;
+    padding: 30px 80px;
+    border-radius: 30px;
+}
+
+.device-h:after {
+    left: auto;
+    right: 10px;
+    bottom: auto;
+    top: 50%;
+    margin-left: 0;
+    margin-top: -30px;
+}
+
+.device-h:before {
+    width: 10px;
+    height: 60px;
+    top: 50%;
+    margin-left: auto;
+    margin-top: -30px;
+    left: 35px;
+}
+
+.device-left {
+    float: left;
+    margin: 0;
+    margin-right: 40px;
+}

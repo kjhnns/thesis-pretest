@@ -1,0 +1,134 @@
+{{define "body"}}
+<div class="container">
+    <div class="device device-left device-v">
+        <div class="device-inner canvas">
+            <canvas id="canvas" height="568" width="320">
+            </canvas>
+        </div>
+    </div>
+</div>
+<script>
+var application = function() {
+    var self = {};
+
+    self.current = 0;
+    self.slides = [];
+
+    self.click = function(event) {
+        var area = self.getArea(event.offsetX, event.offsetY);
+        console.log(area);
+        if (area === false) {
+            self.showAreas();
+        } else {
+            if (area.pos !== false) {
+                self.change(area.pos);
+                if (self.slides[self.current].gps !== undefined) {
+                    self.geoLocate(self.slides[self.current].gps, self.slides[self.current].gps);
+                }
+            }
+        }
+    };
+
+    self.geoLocate = function(linkAccept, linkDeny) {
+        console.log("locate");
+        navigator.geolocation.getCurrentPosition(function(position) {
+            location.href = linkAccept;
+        }, function() {
+            location.href = linkDeny;
+        });
+    };
+
+    self.showAreas = function() {
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var areas = self.slides[self.current].areas;
+
+        function draw(ctx, areas) {
+            for (var i = 0; i < areas.length; i++) {
+                var a = areas[i];
+                ctx.beginPath();
+                ctx.lineWidth = "4";
+                ctx.strokeStyle = "green";
+                ctx.rect(a.x, a.y, a.w, a.h);
+                ctx.stroke();
+            }
+        }
+
+        (function() {
+            var alpha = 0,
+                delta = 0.1,
+                loopBreak = false;
+
+            function loop() {
+                /// increase alpha with delta value
+                alpha += delta;
+                //// if delta <=0 or >=1 then reverse
+                if (alpha <= 0 || alpha >= 1) {
+                    delta = -delta;
+                    loopBreak = true;
+                }
+                /// clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                /// set global alpha
+                ctx.globalAlpha = alpha;
+                draw(ctx, areas);
+
+                if (loopBreak === true && alpha <= 0) {
+                    return;
+                }
+                requestAnimationFrame(loop);
+            }
+            loop();
+        })();
+    };
+
+    self.change = function(pos) {
+        var chgBg = function(file) {
+            $(".canvas").css("background", "urL('/public/" + file + "')");
+            $(".canvas").css("background-size", "cover");
+            $(".canvas").css("background-repeat", "no-repeat");
+        };
+
+        if (self.slides[pos]) {
+            console.log('state:',self.slides[pos].file,pos);
+            chgBg(self.slides[pos].file);
+            self.current = pos;
+        }
+    };
+
+    self.getArea = function(x, y) {
+        console.log(x, y);
+        var areas = self.slides[self.current].areas;
+        for (var i = 0; i < areas.length; i++) {
+            var a = areas[i];
+            if ((a.x <= x && x <= a.x + a.w) && (a.y <= y && y <= a.y + a.h)) {
+                return a;
+            }
+        }
+        return false;
+    };
+
+    self.init = function(slides) {
+        self.slides = slides;
+        self.change(0);
+        $(".canvas").click(self.click);
+
+        window.requestAnimationFrame = (function() {
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function(callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                };
+        })();
+    };
+
+    return self;
+};
+
+
+$(document).ready(function() {
+    application().init(slides);
+});
+</script>
+{{end}}

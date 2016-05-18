@@ -1,17 +1,103 @@
 {{template "head"}}
-<div class="container">
-    <div class="row">
-        <div class="12u">
-            <h1>Chat</h1>
-            <p>Dear participant,</p>
-            <p>thank you for evaluating the app „FindFriends“.</p>
-            <p>„FindFriends“ is a mobile application to share connect you with your closest friends and colleagues.</p>
-            <p>In order to access all features of „FindFriends“ we need your current location.</p>
-            By disclosing your smartphones GPS-data we can access your location and share it with your friends.
-            <p>To test the application, please grant the required permissions for your facebook account.</p>
-        </div>
-    </div>
-</div>
 <script>
+var slides = [{
+    file: 'chat/m2.png',
+    areas: [{
+        x: 0,
+        y: 0,
+        w: 320,
+        h: 560,
+        pos: 1
+    }]
+}, {
+    file: 'chat/m1.png',
+    areas: [{
+        x: 180,
+        y: 100,
+        w: 120,
+        h: 50,
+        pos: 2
+    }]
+}, {
+    file: 'chat/m4.png',
+    areas: [{
+        x: 10,
+        y: 30,
+        w: 80,
+        h: 80,
+        pos: 3
+    }]
+}, {
+    file: 'chat/m3.png',
+    areas: [{
+        x: 10,
+        y: 30,
+        w: 80,
+        h: 80,
+        pos: 4
+    }]
+}, {
+    file: 'chat/m10.png',
+    areas: [{
+        x: 0,
+        y: 0,
+        w: 320,
+        h: 560,
+        pos: 5
+    }]
+}, {
+    file: 'chat/m9.png',
+    areas: [{
+        x: 100,
+        y: 400,
+        w: 220,
+        h: 90,
+        pos: 6
+    }, {
+        x: 10,
+        y: 534,
+        w: 200,
+        h: 22,
+        pos: 7
+    }]
+}, {
+    file: 'chat/m8.png',
+    gps: "https://docs.google.com/forms/d/1o23YXWhbbvJbOdxo43OOvKE-nN8bItlkvx02m9Ec8zo/viewform",
+    areas: [{
+        x: 50,
+        y: 310,
+        w: 220,
+        h: 40,
+        pos: false,
+    }]
+}, {
+    file: 'chat/m5.png',
+    areas: [{
+        x: 225,
+        y: 530,
+        w: 90,
+        h: 25,
+        pos: 8
+    }]
+}, {
+    file: 'chat/m6.png',
+    areas: [{
+        x: 100,
+        y: 400,
+        w: 220,
+        h: 90,
+        pos: 9
+    }]
+}, {
+    file: 'chat/m7.png',
+    gps: "https://docs.google.com/forms/d/1o23YXWhbbvJbOdxo43OOvKE-nN8bItlkvx02m9Ec8zo/viewform",
+    areas: [{
+        x: 50,
+        y: 310,
+        w: 220,
+        h: 40,
+        pos: false,
+    }]
+}];
 </script>
-{{template "foot"}}
+{{template "body"}} {{template "foot"}}
