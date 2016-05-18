@@ -108,10 +108,18 @@ var application = function() {
         return false;
     };
 
+    self.preload =function() {
+      $(self.slides).each(function() {
+         $('<img/>')[0].src = "/public/"+this.file;
+      })
+    };
+
     self.init = function(slides) {
         self.slides = slides;
         self.change(0);
         $(".canvas").click(self.click);
+
+        self.preload();
 
         window.requestAnimationFrame = (function() {
             return window.requestAnimationFrame ||
