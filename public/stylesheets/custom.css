@@ -1,0 +1,24 @@
+body {
+    min-width: 1024px;
+    min-height: 700px;
+    overflow: scroll;
+    height: 100%;
+}
+
+div.imprint p {
+    color: #ccc;
+    font-size: 10px;
+    margin: 2px;
+    padding: 0;
+    line-height: initial;
+}
+
+div.imprint {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+html {
+    height: 100%;
+}
