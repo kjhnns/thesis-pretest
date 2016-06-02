@@ -22,8 +22,9 @@ var application = function() {
         } else {
             if (area.pos !== false) {
                 self.change(area.pos);
+                location.hash = "#" + area.pos;
                 if (self.slides[self.current].gps !== undefined) {
-                    self.geoLocate(self.slides[self.current].gps, self.slides[self.current].gps);
+                    self.geoLocate(self.slides[self.current].gps, self.slides[self.current].nogps);
                 }
             }
         }
@@ -90,7 +91,7 @@ var application = function() {
         };
 
         if (self.slides[pos]) {
-            console.log('state:',self.slides[pos].file,pos);
+            console.log('state:', self.slides[pos].file, pos);
             chgBg(self.slides[pos].file);
             self.current = pos;
         }
@@ -108,18 +109,26 @@ var application = function() {
         return false;
     };
 
-    self.preload =function() {
-      $(self.slides).each(function() {
-         $('<img/>')[0].src = "/public/"+this.file;
-      })
+    self.preload = function() {
+        $(self.slides).each(function() {
+            $('<img/>')[0].src = "/public/" + this.file;
+        })
     };
 
     self.init = function(slides) {
         self.slides = slides;
-        self.change(0);
+        if (+window.location.hash.substring(1) > 0) {
+            self.change(+window.location.hash.substring(1));
+        } else {
+            self.change(0);
+        }
         $(".canvas").click(self.click);
 
         self.preload();
+
+        $(window).on('hashchange', function() {
+            self.change(+window.location.hash.substring(1));
+        });
 
         window.requestAnimationFrame = (function() {
             return window.requestAnimationFrame ||
