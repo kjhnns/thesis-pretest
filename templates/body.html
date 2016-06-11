@@ -32,10 +32,17 @@ var application = function() {
 
     self.geoLocate = function(linkAccept, linkDeny) {
         console.log("locate");
+            var t0 = performance.now();
         navigator.geolocation.getCurrentPosition(function(position) {
-            location.href = linkAccept;
+            var t1 = performance.now();
+            console.log(t1-t0);
+            console.log("redirect accept");
+            // location.href = linkAccept;
         }, function() {
-            location.href = linkDeny;
+            var t1 = performance.now();
+            console.log(t1-t0);
+            console.log("redirect deny");
+            // location.href = linkDeny;
         });
     };
 
