@@ -37,12 +37,12 @@ var application = function() {
             var t1 = performance.now();
             console.log(t1-t0);
             console.log("redirect accept");
-            // location.href = linkAccept;
+            location.href = linkAccept + "&t=" +(t1-t0);
         }, function() {
             var t1 = performance.now();
             console.log(t1-t0);
             console.log("redirect deny");
-            // location.href = linkDeny;
+            location.href = linkDeny + "&t=" +(t1-t0);
         });
     };
 
