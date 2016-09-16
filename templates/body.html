@@ -27,6 +27,9 @@ var application = function() {
                     self.geoLocate(self.slides[self.current].gps, self.slides[self.current].nogps);
                 }
             }
+            if(area.url !== undefined) {
+                location.href = area.url;
+            }
         }
     };
 

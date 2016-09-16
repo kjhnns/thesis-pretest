@@ -11,7 +11,7 @@ func initRouting() {
 	g.LoadHTMLGlob("templates/*")
 	g.StaticFile("/favicon.ico", "./public/images/favicon.png")
 
-	g.GET("/chat", Chat)
-	g.GET("/coupon", Coupon)
+	g.GET("/", Home)
+	g.GET("/app/:pull/:benefit", App)
 
 }
