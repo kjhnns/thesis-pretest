@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"net/http"
 	"time"
+	"fmt"
 )
 
 func App(c *gin.Context) {
@@ -33,6 +34,14 @@ func App(c *gin.Context) {
 	})
 }
 
+func Redirect(c *gin.Context) {
+	pull := c.Param("pull")
+	popular := c.Param("popular")
+	disclose := c.Param("disclose")
+	url := fmt.Sprintf("http://umfragen.ise.tu-darmstadt.de/sosci/privacyresearch/?password=test&pull=%d&popular=%d&disclose=%d", pull, popular, disclose)
+	c.Redirect(http.StatusMovedPermanently, url)
+}
+
 func Home(c *gin.Context) {
 	rand.Seed(time.Now().UnixNano())
 	mode := rand.Intn(6)
@@ -45,7 +54,6 @@ func Home(c *gin.Context) {
 		"https://marvelapp.com/33a3bgh/screen/17622786",
 		"https://marvelapp.com/33a3a8e/screen/17622754",
 	}
-
 
 	// urls := []string{
 	// 	"/app/0/0",

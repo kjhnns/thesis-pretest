@@ -12,6 +12,7 @@ func initRouting() {
 	g.StaticFile("/favicon.ico", "./public/images/favicon.png")
 
 	g.GET("/", Home)
-	g.GET("/app/:pull/:benefit", App)
+  g.GET("/app/:pull/:benefit", App)
+  g.GET("/survey/:pull/:popular/:disclose", Redirect)
 
 }
