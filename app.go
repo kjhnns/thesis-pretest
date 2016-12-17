@@ -35,14 +35,24 @@ func App(c *gin.Context) {
 
 func Home(c *gin.Context) {
 	rand.Seed(time.Now().UnixNano())
-	mode := rand.Intn(4)
+	mode := rand.Intn(6)
 
 	urls := []string{
-		"/app/0/0",
-		"/app/0/1",
-		"/app/1/0",
-		"/app/1/1",
+		"https://marvelapp.com/17475hc/screen/17622836",
+		"https://marvelapp.com/17477hg/screen/17622959",
+		"https://marvelapp.com/4f55e1j/screen/17622902",
+		"https://marvelapp.com/33a2g74/screen/17622421",
+		"https://marvelapp.com/33a3bgh/screen/17622786",
+		"https://marvelapp.com/33a3a8e/screen/17622754",
 	}
+
+
+	// urls := []string{
+	// 	"/app/0/0",
+	// 	"/app/0/1",
+	// 	"/app/1/0",
+	// 	"/app/1/1",
+	// }
 
 	c.Redirect(302, urls[mode])
 }
