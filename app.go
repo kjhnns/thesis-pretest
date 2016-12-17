@@ -35,9 +35,10 @@ func App(c *gin.Context) {
 }
 
 func Redirect(c *gin.Context) {
-	pull := c.Param("pull")
-	popular := c.Param("popular")
-	disclose := c.Param("disclose")
+	popular,_ := strconv.Atoi(c.Param("popular"))
+	pull,_ := strconv.Atoi(c.Param("pull"))
+	disclose,_ := strconv.Atoi(c.Param("disclose"))
+
 	url := fmt.Sprintf("http://umfragen.ise.tu-darmstadt.de/sosci/privacyresearch/?password=test&pull=%d&popular=%d&disclose=%d", pull, popular, disclose)
 	c.Redirect(http.StatusMovedPermanently, url)
 }
