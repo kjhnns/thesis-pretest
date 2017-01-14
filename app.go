@@ -1,12 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"net/http"
-	"time"
-	"fmt"
 	"strconv"
+	"time"
 )
 
 func App(c *gin.Context) {
@@ -36,15 +36,29 @@ func App(c *gin.Context) {
 }
 
 func Redirect(c *gin.Context) {
-	popular,_ := strconv.Atoi(c.Param("popular"))
-	pull,_ := strconv.Atoi(c.Param("pull"))
-	disclose,_ := strconv.Atoi(c.Param("disclose"))
+	cookie, _ := c.Request.Cookie("session")
+	fmt.Println(cookie.Value)
 
-	url := fmt.Sprintf("http://umfragen.ise.tu-darmstadt.de/sosci/privacyresearch/?password=test&pull=%d&popular=%d&disclose=%d", pull, popular, disclose)
+	popular, _ := strconv.Atoi(c.Param("popular"))
+	pull, _ := strconv.Atoi(c.Param("pull"))
+	disclose, _ := strconv.Atoi(c.Param("disclose"))
+
+	url := fmt.Sprintf("http://umfragen.ise.tu-darmstadt.de/sosci/privacyresearch/?password=test&pull=%d&popular=%d&disclose=%d&sess=%s", pull, popular, disclose, cookie.Value)
 	c.Redirect(http.StatusMovedPermanently, url)
 }
 
 func Home(c *gin.Context) {
+	session := c.DefaultQuery("user", "none")
+
+	cookie := http.Cookie{
+		Name:    "session",
+		Value:   session,
+		Expires: time.Date(2017, time.November, 10, 23, 0, 0, 0, time.UTC),
+	}
+	fmt.Println(cookie.String())
+
+	http.SetCookie(c.Writer, &cookie)
+
 	rand.Seed(time.Now().UnixNano())
 	mode := rand.Intn(6)
 
